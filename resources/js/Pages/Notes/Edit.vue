@@ -29,10 +29,17 @@
                                 Contenido
                             </label>
                             <textarea class="form-input w-full rounded-md shadow-sm" v-model="form.content" rows="8"></textarea>
-                            <button class="bg-blue-500 hover:bg-glue-700 text-white font-bold py-2 px-4 rounded-md ">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
                                 Editar
                             </button>
                         </form>
+                        
+                        <hr class="my-6">
+                         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md" @click.prevent="destroy">
+                                Eliminar Nota
+                            </button>
+
+
                     </div>
                 </div>
             </div>
@@ -62,6 +69,11 @@
         methods: {
             submit(){
                 this.$inertia.put(this.route('notes.update', this.note.id), this.form)
+            },
+            destroy(){
+                if(confirm('¿Desea Eliminar?')){
+                    this.$inertia.delete(this.route('notes.destroy', this.note.id))
+                }
             }
         }
     }
